@@ -35,35 +35,33 @@ class HomeController extends AbstractController
         $doctrine = $doctrine->getManager();
         $doctrine->persist($filmSerie);
         $doctrine->flush();
-        
+
         return $this->json([$filmSerie,'status' => 'film or serie create successfully', 'message' => 'Le film ou serie a été créé avec succes'], Response::HTTP_CREATED, );
-        
     }
 
     #[Route('/getAll', name: 'app_getAll_listing')]
-    public function getAll(ManagerRegistry $doctrine, FilmsSeriesRepository $filmsSeriesRepository): Response
+    public function getAll(FilmsSeriesRepository $filmsSeriesRepository): Response
     {
         $listing = $filmsSeriesRepository->findAll();
         dd($listing);
-        
-        if ($listing){
+
+        if ($listing) {
             return $this->json([$listing, 'status' => 'success', 'message' => 'liste recupérer avec succes'], Response::HTTP_OK, );
-        }else{
+        } else {
             return $this->json(['status' => 'error', 'message' => 'liste vide'], Response::HTTP_NOT_FOUND, );
         }
-        
-        // return $this->render('listing/listing.html.twig', [
-        //     'controller_name' => 'HomeController', 
-        //     'listing' => $listing,
-        // ]);
     }
 
     #[Route('/get/{id_item}', name: 'app_listing')]
     public function getItem($id_item, Request $request, FilmsSeriesRepository $filmsSeriesRepository): Response
     {
         $listing = $filmsSeriesRepository->findOneBy(['id' => $id_item]);
+        // dd($listing);
 
-        dd($listing);
-        return $this->json([$listing, 'status' => 'success', 'message' => 'liste recupérer avec succes'], Response::HTTP_OK, );
+        if ($listing) {
+            return $this->json([$listing, 'status' => 'success', 'message' => 'Item recupérer avec succes'], Response::HTTP_OK, );
+        } else {
+            return $this->json([$listing, 'status' => 'error', 'message' => 'L\'item n\'éxiste pas dans la base de donnée'], Response::HTTP_NOT_FOUND, );
+        }
     }
 }
