@@ -42,8 +42,11 @@ class HomeController extends AbstractController
     #[Route('/getAll', name: 'app_getAll_listing')]
     public function getAll(FilmsSeriesRepository $filmsSeriesRepository): Response
     {
-        $listing = $filmsSeriesRepository->findAll();
-        dd($listing);
+        $listing = [];
+        // dd($listing);
+        foreach ($filmsSeriesRepository->findAll() as $key => $value) {
+            $listing[] = $value->getInfos();
+        }
 
         if ($listing) {
             return $this->json([$listing, 'status' => 'success', 'message' => 'liste recupérer avec succes'], Response::HTTP_OK, );

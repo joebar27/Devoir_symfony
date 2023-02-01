@@ -78,4 +78,15 @@ class FilmsSeries
 
         return $this;
     }
+
+    public function getInfos(): array
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'synopsis' => $this->getSynopsis(),
+            'type' => $this->getType(),
+            'createdDate' => $this->getCreatedDate(),
+        ];
+    }
 }
