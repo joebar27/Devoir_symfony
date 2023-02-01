@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste films/series{% endblock %}
+
+{% block body %}
+<h1>Voici la liste complete des films et series</h1>
+{% for film in listing %}
+    <h2>Nom :</h2>
+    <p>{{ film.name }}</p>
+    <h2>Synopsis :</h2>
+    <p>{{ film.synopsis }}</p>
+    <h2>Type :</h2>
+    <p>{{ film.type }}</p>
+    <p>----------------------------------------------------------</p>
+    <p>{{ film.createdDate|date('Y-m-d') }}</p>
+{% endfor %}
+{% endblock %}

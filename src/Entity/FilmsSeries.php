@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\FilmsRepository;
+use App\Repository\FilmsSeriesRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: FilmsRepository::class)]
+#[ORM\Entity(repositoryClass: FilmsSeriesRepository::class)]
 class FilmsSeries
 {
-    #[Id]
+    #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;

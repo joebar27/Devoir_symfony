@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Films;
+use App\Entity\FilmsSeries;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -14,14 +14,14 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Films[]    findAll()
  * @method Films[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class FilmsRepository extends ServiceEntityRepository
+class FilmsSeriesRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Films::class);
+        parent::__construct($registry, FilmsSeries::class);
     }
 
-    public function save(Films $entity, bool $flush = false): void
+    public function save(FilmsSeries $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class FilmsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(Films $entity, bool $flush = false): void
+    public function remove(FilmsSeries $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
