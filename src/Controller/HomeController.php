@@ -43,7 +43,6 @@ class HomeController extends AbstractController
     public function getAll(FilmsSeriesRepository $filmsSeriesRepository): Response
     {
         $listing = [];
-        // dd($listing);
         foreach ($filmsSeriesRepository->findAll() as $key => $value) {
             $listing[] = $value->getInfos();
         }
@@ -56,11 +55,10 @@ class HomeController extends AbstractController
     }
 
     #[Route('/get/{id_item}', name: 'app_listing')]
-    public function getItem($id_item, Request $request, FilmsSeriesRepository $filmsSeriesRepository): Response
+    public function getItem($id_item, FilmsSeriesRepository $filmsSeriesRepository): Response
     {
-        $listing = $filmsSeriesRepository->findOneBy(['id' => $id_item]);
-        // dd($listing);
-
+        $listing = $filmsSeriesRepository->findOneBy(['id' => $id_item])->getInfos();
+        
         if ($listing) {
             return $this->json([$listing, 'status' => 'success', 'message' => 'Item recupérer avec succes'], Response::HTTP_OK, );
         } else {
